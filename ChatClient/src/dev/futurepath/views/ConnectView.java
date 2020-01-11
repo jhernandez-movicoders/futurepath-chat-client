@@ -5,6 +5,8 @@
  */
 package dev.futurepath.views;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Pedro Ojeda
@@ -27,22 +29,22 @@ public class ConnectView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        usernameLabel = new javax.swing.JLabel();
+        connectButtom = new javax.swing.JButton();
+        UsernameText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel1.setText("User:");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(40, 90, 80, 20);
+        usernameLabel.setText("User:");
+        getContentPane().add(usernameLabel);
+        usernameLabel.setBounds(40, 90, 80, 20);
 
-        jButton1.setText("Connect");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(150, 230, 89, 29);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(110, 90, 210, 26);
+        connectButtom.setText("Connect");
+        getContentPane().add(connectButtom);
+        connectButtom.setBounds(280, 160, 89, 29);
+        getContentPane().add(UsernameText);
+        UsernameText.setBounds(110, 90, 210, 26);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -82,9 +84,17 @@ public class ConnectView extends javax.swing.JFrame {
         });
     }
 
+    public JTextField getUsernameText() {
+        return UsernameText;
+    }
+
+    public void setUsernameText(JTextField UsernameText) {
+        this.UsernameText = UsernameText;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField UsernameText;
+    private javax.swing.JButton connectButtom;
+    private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }
