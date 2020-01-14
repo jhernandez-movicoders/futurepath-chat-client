@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 package dev.futurepath.controllers;
 
 /**
@@ -10,5 +12,10 @@ package dev.futurepath.controllers;
  * @author DarkP
  */
 public class RoomListController {
+
+    public RoomListController() {
+        
+    }
+    
     
 }
