@@ -32,17 +32,17 @@ public class ConnectController {
     }
     
     public void Connect(){
-        String username = connectFrame.getUsernameText().getText();
+        String username = this.connectFrame.getUsernameText().getText().trim();
             
         try {
             
             this.client = new Socket(this.serverName, this.port);
             
-            OutputStream outToServer = client.getOutputStream();
+            OutputStream outToServer = this.client.getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
             out.writeUTF("CONNECT "+username); //cambiar dependiendo de los monos borachos
             
-            InputStream inFromServer = client.getInputStream();
+            InputStream inFromServer = this.client.getInputStream();
             DataInputStream in = new DataInputStream(inFromServer);
             if (in.readUTF() == "mensaje afirmativo"){
                 //abrir ventana correspondiente
