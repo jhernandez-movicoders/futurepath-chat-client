@@ -25,7 +25,9 @@ public class ConnectController {
     private String serverName = "192.168.43.9";
     private int port = 6066;
     private ConnectView connectFrame;
-    private Socket client;
+    protected static Socket client;
+    protected static DataOutputStream out;
+    protected static DataInputStream in;
     
     public ConnectController(ConnectView connect) {
         this.connectFrame = connectFrame;
@@ -39,18 +41,18 @@ public class ConnectController {
             this.client = new Socket(this.serverName, this.port);
             
             OutputStream outToServer = this.client.getOutputStream();
-            DataOutputStream out = new DataOutputStream(outToServer);
-            out.writeUTF("CONNECT "+username); //cambiar dependiendo de los monos borachos
+            this.out = new DataOutputStream(outToServer);
+            this.out.writeUTF("CONNECT "+username); //cambiar dependiendo de los monos borachos
             
             InputStream inFromServer = this.client.getInputStream();
-            DataInputStream in = new DataInputStream(inFromServer);
-            if (in.readUTF() == "mensaje afirmativo"){
+            this.in = new DataInputStream(inFromServer);
+            if (this.in.readUTF() == "mensaje afirmativo"){
                 //abrir ventana correspondiente
             }
             else{
                 //gestionar mensaje de error
             }
-            client.close();
+            //client.close();
             
         } catch (IOException ex) {
             Logger.getLogger(ConnectController.class.getName()).log(Level.SEVERE, null, ex);
