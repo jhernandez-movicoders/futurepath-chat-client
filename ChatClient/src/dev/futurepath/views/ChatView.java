@@ -5,6 +5,11 @@
  */
 package dev.futurepath.views;
 
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Daniel Gomez
@@ -16,6 +21,46 @@ public class ChatView extends javax.swing.JPanel {
      */
     public ChatView() {
         initComponents();
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public void setjScrollPane2(JScrollPane jScrollPane2) {
+        this.jScrollPane2 = jScrollPane2;
+    }
+
+    public JTextField getMessageTextField() {
+        return messageTextField;
+    }
+
+    public void setMessageTextField(JTextField messageTextField) {
+        this.messageTextField = messageTextField;
+    }
+
+    public JTextArea getMessagesTextArea() {
+        return messagesTextArea;
+    }
+
+    public void setMessagesTextArea(JTextArea messagesTextArea) {
+        this.messagesTextArea = messagesTextArea;
+    }
+
+    public JList<String> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(JList<String> userList) {
+        this.userList = userList;
     }
 
     /**
@@ -43,11 +88,6 @@ public class ChatView extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(10, 10, 270, 200);
 
-        userList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(userList);
 
         add(jScrollPane2);
