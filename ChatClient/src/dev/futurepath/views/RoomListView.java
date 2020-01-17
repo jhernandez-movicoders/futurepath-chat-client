@@ -30,27 +30,32 @@ public class RoomListView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         roomList = new javax.swing.JList<>();
         selectRoomButton = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setLayout(null);
 
-        roomList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(roomList);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(60, 0, 280, 210);
+        jScrollPane1.setBounds(10, 60, 380, 180);
 
-        selectRoomButton.setText("Select Room");
+        selectRoomButton.setText("Update");
         add(selectRoomButton);
-        selectRoomButton.setBounds(110, 220, 180, 50);
+        selectRoomButton.setBounds(130, 250, 170, 40);
+        add(jTextField1);
+        jTextField1.setBounds(10, 10, 270, 40);
+
+        jButton1.setText("jButton1");
+        add(jButton1);
+        jButton1.setBounds(290, 10, 100, 40);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JList<String> roomList;
     private javax.swing.JButton selectRoomButton;
     // End of variables declaration//GEN-END:variables
