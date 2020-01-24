@@ -27,5 +27,42 @@ public class OutcomingMsgController {
         }
     }
     
+    public void joinRoom(){
+        String room = this.roomListView.getRoomTF().getText();
+        String toServerMsg = JOIN + SEP + room;
+        try {
+            ConnectController.out.writeUTF(toServerMsg);
+        } catch (IOException ex) {
+            Logger.getLogger(OutcomingMsgController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void leaveRoom(){
+        String toServerMsg = LEAVE;
+        try {
+            ConnectController.out.writeUTF(toServerMsg);
+        } catch (IOException ex) {
+            Logger.getLogger(OutcomingMsgController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void disconnect(){
+        String toServerMsg = DISCONNECT;
+        try {
+            ConnectController.out.writeUTF(toServerMsg);
+        } catch (IOException ex) {
+            Logger.getLogger(OutcomingMsgController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void listRomms(){
+        String toServerMsg = LIST + SEP + "-r";
+        try {
+            ConnectController.out.writeUTF(toServerMsg);
+        } catch (IOException ex) {
+            Logger.getLogger(OutcomingMsgController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
 }
