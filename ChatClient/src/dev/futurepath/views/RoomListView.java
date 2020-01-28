@@ -5,8 +5,10 @@
  */
 package dev.futurepath.views;
 
-import dev.futurepath.controllers.IncomingMsgController;
 import dev.futurepath.controllers.OutcomingMsgController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -23,7 +25,11 @@ public class RoomListView extends javax.swing.JPanel {
     private OutcomingMsgController controllerOut = new OutcomingMsgController();
     
     public RoomListView() {
+        
         initComponents();
+        DefaultListModel<String> model = new DefaultListModel<>();
+        model.addElement("stringo");
+        this.roomList.setModel(model);
     }
 
     public JScrollPane getjScrollPane1() {
@@ -76,6 +82,16 @@ public class RoomListView extends javax.swing.JPanel {
 
         setLayout(null);
 
+        roomList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "algo" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        roomList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                roomListValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(roomList);
 
         add(jScrollPane1);
@@ -107,8 +123,13 @@ public class RoomListView extends javax.swing.JPanel {
     }//GEN-LAST:event_joinButtonActionPerformed
 
     private void updateListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateListButtonActionPerformed
-        this.controllerOut.listRomms();
+        this.controllerOut.listRooms();
     }//GEN-LAST:event_updateListButtonActionPerformed
+
+    private void roomListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_roomListValueChanged
+        String selected = this.roomList.getSelectedValue();
+        this.roomTF.setText(selected);
+    }//GEN-LAST:event_roomListValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
