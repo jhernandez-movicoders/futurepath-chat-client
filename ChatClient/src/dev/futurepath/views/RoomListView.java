@@ -5,19 +5,60 @@
  */
 package dev.futurepath.views;
 
+import dev.futurepath.controllers.IncomingMsgController;
+import dev.futurepath.controllers.OutcomingMsgController;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author DarkP
  */
+
 public class RoomListView extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ChatRoomView
-     */
+    //private IncomingMsgController controllerIn = new IncomingMsgController();
+    private OutcomingMsgController controllerOut = new OutcomingMsgController();
+    
     public RoomListView() {
         initComponents();
     }
 
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JList<String> getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(JList<String> roomList) {
+        this.roomList = roomList;
+    }
+
+    public JButton getSelectRoomButton() {
+        return updateListButton;
+    }
+
+    public void setSelectRoomButton(JButton selectRoomButton) {
+        this.updateListButton = selectRoomButton;
+    }
+
+    public JTextField getRoomTF() {
+        return roomTF;
+    }
+
+    public void setRoomTF(JTextField roomTF) {
+        this.roomTF = roomTF;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,29 +70,52 @@ public class RoomListView extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         roomList = new javax.swing.JList<>();
-        selectRoomButton = new javax.swing.JButton();
+        updateListButton = new javax.swing.JButton();
+        joinButton = new javax.swing.JButton();
+        roomTF = new javax.swing.JTextField();
 
         setLayout(null);
 
-        roomList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(roomList);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(60, 0, 280, 210);
+        jScrollPane1.setBounds(20, 60, 300, 180);
 
-        selectRoomButton.setText("Select Room");
-        add(selectRoomButton);
-        selectRoomButton.setBounds(110, 220, 180, 50);
+        updateListButton.setText("Update");
+        updateListButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateListButtonActionPerformed(evt);
+            }
+        });
+        add(updateListButton);
+        updateListButton.setBounds(130, 250, 190, 30);
+
+        joinButton.setText("Join");
+        joinButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                joinButtonActionPerformed(evt);
+            }
+        });
+        add(joinButton);
+        joinButton.setBounds(250, 20, 70, 25);
+        add(roomTF);
+        roomTF.setBounds(20, 20, 220, 22);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void joinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joinButtonActionPerformed
+        this.controllerOut.joinRoom();
+    }//GEN-LAST:event_joinButtonActionPerformed
+
+    private void updateListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateListButtonActionPerformed
+        this.controllerOut.listRomms();
+    }//GEN-LAST:event_updateListButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton joinButton;
     private javax.swing.JList<String> roomList;
-    private javax.swing.JButton selectRoomButton;
+    private javax.swing.JTextField roomTF;
+    private javax.swing.JButton updateListButton;
     // End of variables declaration//GEN-END:variables
 }

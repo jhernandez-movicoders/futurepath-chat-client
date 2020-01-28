@@ -24,9 +24,10 @@ import java.util.logging.Logger;
 public class ConnectController {
     
     //127.0.0.1 and 6066
+    //192.168.2.83 and 6666
 
-    private String serverName = "192.168.2.83";
-    private int port = 6666;
+    private String serverName = "127.0.0.1";
+    private int port = 6066;
     private ConnectView connectFrame;
     protected static Socket client;
     protected static DataOutputStream out;

@@ -5,6 +5,11 @@
  */
 package dev.futurepath.views;
 
+import dev.futurepath.controllers.ConnectController;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -13,11 +18,16 @@ import javax.swing.JTextField;
  */
 public class ConnectView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ConnectView
-     */
+    private ConnectController controller;
+    
     public ConnectView() {
+        this.controller = new ConnectController(this);
         initComponents();
+        Dimension d= new Dimension(700, 700);
+        setSize(d);
+        setPreferredSize(d);
+        setMinimumSize(d);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -29,25 +39,39 @@ public class ConnectView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        usernameLabel = new javax.swing.JLabel();
+        containerPanel = new javax.swing.JPanel();
+        userTF = new javax.swing.JTextField();
         connectButtom = new javax.swing.JButton();
-        UsernameText = new javax.swing.JTextField();
+        usernameLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        usernameLabel.setText("User:");
-        getContentPane().add(usernameLabel);
-        usernameLabel.setBounds(40, 90, 80, 20);
+        containerPanel.setLayout(null);
+        containerPanel.add(userTF);
+        userTF.setBounds(110, 90, 210, 22);
 
         connectButtom.setText("Connect");
-        getContentPane().add(connectButtom);
-        connectButtom.setBounds(280, 160, 89, 29);
-        getContentPane().add(UsernameText);
-        UsernameText.setBounds(110, 90, 210, 26);
+        connectButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectButtomActionPerformed(evt);
+            }
+        });
+        containerPanel.add(connectButtom);
+        connectButtom.setBounds(260, 170, 79, 25);
 
-        pack();
+        usernameLabel.setText("User:");
+        containerPanel.add(usernameLabel);
+        usernameLabel.setBounds(40, 90, 80, 16);
+
+        getContentPane().add(containerPanel);
+        containerPanel.setBounds(0, 0, 400, 300);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void connectButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectButtomActionPerformed
+        controller.connect();
+        //loadPanel(new RoomListView());
+    }//GEN-LAST:event_connectButtomActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -79,22 +103,41 @@ public class ConnectView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConnectView().setVisible(true);
+                ConnectView cv = new ConnectView();
+                cv.setVisible(true);
+                cv.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                
             }
         });
     }
-
-    public JTextField getUsernameText() {
-        return UsernameText;
+    
+    private void loadPanel(JPanel panelToLoad){
+        this.containerPanel.removeAll();
+        this.containerPanel.setLayout(new BorderLayout());
+        this.containerPanel.add(panelToLoad, BorderLayout.CENTER);
     }
 
-    public void setUsernameText(JTextField UsernameText) {
-        this.UsernameText = UsernameText;
+    public JTextField getUserTF() {
+        return userTF;
     }
 
+    public void setUserTF(JTextField userTF) {
+        this.userTF = userTF;
+    }
+    
+    public JPanel getContainerPanel() {
+        return containerPanel;
+    }
+
+    public void setContainerPanel(JPanel containerPanel) {
+        this.containerPanel = containerPanel;
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField UsernameText;
     private javax.swing.JButton connectButtom;
+    private javax.swing.JPanel containerPanel;
+    private javax.swing.JTextField userTF;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }
