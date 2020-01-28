@@ -55,7 +55,7 @@ public class IncomingMsgController implements RefreshChat.ChatListener {
             System.out.println("MSG: " + message2);
             if (parts[0].equals(MESSAGE)) {
                 String textMsg = "";
-                for (int i = 2; i < parts.length; i++) {
+                for (int i = 3; i < parts.length; i++) {
                     textMsg += parts[i] + " ";
                 }
                 String message = "<" + parts[1] + "> " + textMsg + "\n";

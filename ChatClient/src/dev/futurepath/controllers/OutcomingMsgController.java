@@ -39,7 +39,7 @@ public class OutcomingMsgController {
         String toServerMsg = SEND + SEP + cv.getRoomName() + SEP + textMsg;
         try {
             ConnectController.out.writeUTF(toServerMsg);
-            cv.getMessagesTextArea().append(textMsg+"\n");
+           // cv.getMessagesTextArea().append(textMsg+"\n");
             cv.getMessageTextField().setText("");
             
         } catch (IOException ex) {
