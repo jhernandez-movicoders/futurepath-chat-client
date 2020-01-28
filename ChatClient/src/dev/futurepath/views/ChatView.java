@@ -5,6 +5,7 @@
  */
 package dev.futurepath.views;
 
+import dev.futurepath.controllers.OutcomingMsgController;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -12,16 +13,23 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Daniel Gomez
+ * @author Daniel el Gomas
  */
 public class ChatView extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RoomChatView
-     */
-    public ChatView() {
+    private OutcomingMsgController controllerOut;
+    private String roomName;
+    
+    public ChatView(String roomName) {
         initComponents();
+        controllerOut = new OutcomingMsgController(this);
+        this.roomName = roomName;
     }
+
+    public String getRoomName() {
+        return roomName;
+    }
+    
 
     public JScrollPane getjScrollPane1() {
         return jScrollPane1;
@@ -81,6 +89,7 @@ public class ChatView extends javax.swing.JPanel {
 
         setLayout(null);
 
+        messagesTextArea.setEditable(false);
         messagesTextArea.setColumns(20);
         messagesTextArea.setRows(5);
         jScrollPane1.setViewportView(messagesTextArea);
@@ -94,11 +103,20 @@ public class ChatView extends javax.swing.JPanel {
         jScrollPane2.setBounds(290, 10, 100, 280);
 
         sendButton.setText("Send");
+        sendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendButtonActionPerformed(evt);
+            }
+        });
         add(sendButton);
         sendButton.setBounds(200, 230, 70, 40);
         add(messageTextField);
         messageTextField.setBounds(20, 230, 160, 40);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
+        controllerOut.sendTextMessage(this);
+    }//GEN-LAST:event_sendButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

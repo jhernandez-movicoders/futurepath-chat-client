@@ -26,41 +26,39 @@ public class ConnectController {
     //127.0.0.1 and 6066
     //192.168.2.83 and 6666
 
-    private String serverName = "127.0.0.1";
-    private int port = 6066;
+    private String serverName = "172.18.69.49";
+    private int port = 6666;
     private ConnectView connectFrame;
     protected static Socket client;
     protected static DataOutputStream out;
     protected static DataInputStream in;
+     
 
     public ConnectController(ConnectView connectFrame) {
         this.connectFrame = connectFrame;
     }
 
     public void connect() {
-            
-
+           
         String username = this.connectFrame.getUserTF().getText();
 
         try {
-            connectFrame.getContainerPanel().removeAll();
-            connectFrame.getContainerPanel().setLayout(new BorderLayout());
+            RoomListView listV = new RoomListView();
             connectFrame.getContainerPanel().add(new RoomListView(), BorderLayout.CENTER);
             
             this.client = new Socket(this.serverName, this.port);
             InputStream inFromServer = this.client.getInputStream();
             this.in = new DataInputStream(inFromServer);
-            IncomingMsgController inmc = new IncomingMsgController();
+            IncomingMsgController inmc = new IncomingMsgController(listV);
 
             OutputStream outToServer = this.client.getOutputStream();
             this.out = new DataOutputStream(outToServer);
             this.out.writeUTF("CONNECT " + username);
 
-            //RoomListView roomLV = new RoomListView();
             connectFrame.getContainerPanel().removeAll();
             connectFrame.getContainerPanel().setLayout(new BorderLayout());
-            connectFrame.getContainerPanel().add(new RoomListView(), BorderLayout.CENTER);
-
+            connectFrame.getContainerPanel().add(listV, BorderLayout.CENTER);
+            connectFrame.pack();
             /*if (this.in.readUTF().equals("OK")){
                 RoomListView roomLV = new RoomListView();
                 this.connectFrame.add(roomLV);

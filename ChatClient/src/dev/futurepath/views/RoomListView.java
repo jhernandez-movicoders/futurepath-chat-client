@@ -22,14 +22,16 @@ import javax.swing.JTextField;
 public class RoomListView extends javax.swing.JPanel {
 
     //private IncomingMsgController controllerIn = new IncomingMsgController();
-    private OutcomingMsgController controllerOut = new OutcomingMsgController();
+    private OutcomingMsgController controllerOut;
     
     public RoomListView() {
         
         initComponents();
-        DefaultListModel<String> model = new DefaultListModel<>();
-        model.addElement("stringo");
-        this.roomList.setModel(model);
+        controllerOut = new OutcomingMsgController(this);
+        //DefaultListModel<String> model = new DefaultListModel<>();
+        //model.addElement("stringo");
+        //model.addElement("stringo2soloencines");
+        //this.roomList.setModel(model);
     }
 
     public JScrollPane getjScrollPane1() {
@@ -82,11 +84,6 @@ public class RoomListView extends javax.swing.JPanel {
 
         setLayout(null);
 
-        roomList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "algo" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         roomList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 roomListValueChanged(evt);
@@ -120,6 +117,7 @@ public class RoomListView extends javax.swing.JPanel {
 
     private void joinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joinButtonActionPerformed
         this.controllerOut.joinRoom();
+        
     }//GEN-LAST:event_joinButtonActionPerformed
 
     private void updateListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateListButtonActionPerformed

@@ -31,7 +31,18 @@ public class Server {
                     if ("CONNECT".equals(serverMsgSplitted[0])) {
                         System.out.println("entro en connect en el servidor");
                         streamOut.writeUTF("OK");
-                        
+                    }
+                    else if ("JOIN".equals(serverMsgSplitted[0])){
+                        System.out.println("entro en join en el servidor");
+                        streamOut.writeUTF("ROOM aqwert");
+                    }
+                    else if ("LIST".equals(serverMsgSplitted[0])){
+                        System.out.println("entro en LIST en el servidor");
+                        streamOut.writeUTF("ROOM");
+                    }
+                    else if ("SEND".equals(serverMsgSplitted[0])){
+                        System.out.println("entro en YOQUSE en el servidor");
+                        streamOut.writeUTF("ROOM");
                     }
                 } catch (IOException ioe) {
                     done = true;

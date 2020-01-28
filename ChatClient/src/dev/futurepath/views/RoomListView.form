@@ -33,9 +33,7 @@
         <Component class="javax.swing.JList" name="roomList">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="algo"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>

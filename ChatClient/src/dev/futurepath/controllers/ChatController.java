@@ -3,23 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 package dev.futurepath.controllers;
-
-import dev.futurepath.views.RoomListView;
 
 /**
  *
- * @author DarkP
+ * @author :D
  */
-public class RoomListController {
-
-    private RoomListView roomlistview;
-    
-    public RoomListController() {
-        roomlistview = new RoomListView();
-    }
-    
+public class ChatController {
     
 }

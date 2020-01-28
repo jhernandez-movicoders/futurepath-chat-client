@@ -8,9 +8,11 @@ package dev.futurepath.controllers;
 import dev.futurepath.views.ChatView;
 import dev.futurepath.views.RoomListView;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,7 +20,6 @@ import javax.swing.DefaultListModel;
  */
 public class IncomingMsgController implements RefreshChat.ChatListener {
 
-    private ChatView chatview;
     private RoomListView roomListView;
     private final String SEP = " ";
     private final String MESSAGE = "MESSAGE";
@@ -28,9 +29,8 @@ public class IncomingMsgController implements RefreshChat.ChatListener {
 
     private RefreshChat thread; //debería ser static??
 
-    public IncomingMsgController(ChatView chatview, RoomListView roomListView) {
-        this.chatview = new ChatView();
-        this.roomListView = new RoomListView();
+    public IncomingMsgController(RoomListView roomListView) {
+        this.roomListView = roomListView;
         thread = new RefreshChat();
         thread.addChatListener(this);
         thread.start();
@@ -51,22 +51,36 @@ public class IncomingMsgController implements RefreshChat.ChatListener {
             String serverMsg = ConnectController.in.readUTF();
 
             String[] parts = serverMsg.split(SEP);
-            System.out.println("MSG: " + parts[0]);
+            String message2 = String.join(" ", parts);
+            System.out.println("MSG: " + message2);
             if (parts[0].equals(MESSAGE)) {
                 String textMsg = "";
                 for (int i = 2; i < parts.length; i++) {
                     textMsg += parts[i] + " ";
                 }
-                String message = "<" + parts[1] + "> " + textMsg;
-                chatview.getMessagesTextArea().append(message);
+                String message = "<" + parts[1] + "> " + textMsg + "\n";
+                ArrayList<ChatView> list = OutcomingMsgController.getPanelList();
+                for(ChatView p: list){
+                    if(p.getRoomName().equals(parts[2])){
+                        p.getMessagesTextArea().append(message);
+                    }
+                }
+                //chatview.getMessagesTextArea().append(message); //Tenemos que saber a qué room va el msg
                 serverMsg = "";
             }
             else if (parts[0].equals(USERROOM)) {
                 DefaultListModel<String> model = new DefaultListModel<>();
-                for (int i = 1; i < parts.length; i++) {
+                for (int i = 2; i < parts.length; i++) {
                     model.addElement(parts[i]);
                 }
-                this.chatview.getUserList().setModel(model);
+                ArrayList<ChatView> list = OutcomingMsgController.getPanelList();
+                System.out.println(list.size());
+                for(ChatView p: list){
+                    if(p.getRoomName().equals(parts[1])){
+                        p.getUserList().setModel(model);
+                    }
+                }
+                serverMsg = "";
             }
             else if (parts[0].equals(ROOM)) {
                 DefaultListModel<String> model = new DefaultListModel<>();
@@ -74,10 +88,9 @@ public class IncomingMsgController implements RefreshChat.ChatListener {
                 for (int i = 1; i < parts.length; i++) {
                     model.addElement(parts[i]);
                 }
-                System.out.println(parts[1]);
                 
-                //Es podible que tengamos poner el panel RoomListView aquí pues al conectar devuelve ya una lista de rooms
                 this.roomListView.getRoomList().setModel(model);
+                serverMsg = "";
             }
             
             //Un if más para los errores que salte 

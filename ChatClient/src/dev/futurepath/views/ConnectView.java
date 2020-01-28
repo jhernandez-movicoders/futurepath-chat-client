@@ -23,7 +23,7 @@ public class ConnectView extends javax.swing.JFrame {
     public ConnectView() {
         this.controller = new ConnectController(this);
         initComponents();
-        Dimension d= new Dimension(700, 700);
+        Dimension d= new Dimension(500, 500);
         setSize(d);
         setPreferredSize(d);
         setMinimumSize(d);
