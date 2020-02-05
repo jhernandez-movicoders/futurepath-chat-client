@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dev.futurepath.controllers;
 
 import dev.futurepath.views.ChatView;
@@ -16,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author yo hehe, ayuda
+ * @authors Daniel, Pedro, Anna
  */
 public class IncomingMsgController implements RefreshChat.ChatListener {
 
@@ -26,8 +21,7 @@ public class IncomingMsgController implements RefreshChat.ChatListener {
     private final String USERROOM = "USERROOM";
     private final String USER = "USER";
     private final String ROOM = "ROOM";
-
-    private RefreshChat thread; //debería ser static??
+    private RefreshChat thread;
 
     public IncomingMsgController(RoomListView roomListView) {
         this.roomListView = roomListView;
@@ -43,16 +37,16 @@ public class IncomingMsgController implements RefreshChat.ChatListener {
     }
 
     @Override
-    public void onMessageReceived() { //Este método podría simplente devolver strings y después hacer otros controllers. Un factory pattern para elegir controller???
+    public void onMessageReceived() {
         try {
             System.out.println("entro :D");
-            //COMMAND USER MESSAGE
 
             String serverMsg = ConnectController.in.readUTF();
 
             String[] parts = serverMsg.split(SEP);
-            String message2 = String.join(" ", parts);
-            System.out.println("MSG: " + message2);
+            //String message2 = String.join(" ", parts);
+            //System.out.println("MSG: " + message2);
+            
             if (parts[0].equals(MESSAGE)) {
                 String textMsg = "";
                 for (int i = 3; i < parts.length; i++) {
@@ -65,7 +59,6 @@ public class IncomingMsgController implements RefreshChat.ChatListener {
                         p.getMessagesTextArea().append(message);
                     }
                 }
-                //chatview.getMessagesTextArea().append(message); //Tenemos que saber a qué room va el msg
                 serverMsg = "";
             }
             else if (parts[0].equals(USERROOM)) {
@@ -93,7 +86,6 @@ public class IncomingMsgController implements RefreshChat.ChatListener {
                 serverMsg = "";
             }
             
-            //Un if más para los errores que salte 
         } catch (IOException ex) {
             Logger.getLogger(IncomingMsgController.class.getName()).log(Level.SEVERE, null, ex);
         }
